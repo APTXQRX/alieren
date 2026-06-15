@@ -2,22 +2,30 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aşk Sitesi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>I Love You</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            overflow: hidden;
-            background: linear-gradient(180deg, #ffe4f0, #fff0f5, #ffffff, #fff5f8);
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(180deg, #ffe4f0 0%, #fff0f5 30%, #ffffff 60%, #fff5f8 100%);
             background-size: 100% 300%;
-            animation: gradientBG 10s ease infinite;
+            animation: gradientBG 12s ease infinite;
             min-height: 100vh;
+            min-height: -webkit-fill-available;
         }
 
         @keyframes gradientBG {
@@ -26,137 +34,144 @@
             100% { background-position: 0% 0%; }
         }
 
+        /* HEART RAIN */
         .heart-rain {
             position: fixed;
             top: -60px;
             z-index: 1;
             animation: fall linear infinite;
             pointer-events: none;
-            font-style: normal;
         }
 
         @keyframes fall {
-            0% {
-                top: -60px;
-                opacity: 1;
-                transform: translateX(0) scale(1);
-            }
-            25% {
-                transform: translateX(30px) scale(1.05);
-            }
-            50% {
-                transform: translateX(-20px) scale(0.95);
-            }
-            75% {
-                transform: translateX(25px) scale(1.02);
-            }
-            100% {
-                top: 110vh;
-                opacity: 0.3;
-                transform: translateX(-10px) scale(1);
-            }
+            0% { top: -60px; opacity: 1; transform: translateX(0) scale(1); }
+            25% { transform: translateX(20px) scale(1.05); }
+            50% { transform: translateX(-15px) scale(0.95); }
+            75% { transform: translateX(18px) scale(1.02); }
+            100% { top: 105vh; opacity: 0.2; transform: translateX(-8px) scale(1); }
         }
 
+        /* LOGIN */
         .login-container {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(255, 255, 255, 0.92);
-            padding: 50px 45px;
-            border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(255, 150, 180, 0.3), 0 0 0 1px rgba(255, 200, 220, 0.5);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 40px 30px;
+            border-radius: 28px;
+            box-shadow: 0 25px 60px rgba(255, 150, 180, 0.25), 0 0 0 1px rgba(255, 200, 220, 0.4);
             text-align: center;
             z-index: 100;
-            animation: fadeIn 1s ease-in, glow 3s ease-in-out infinite;
-            width: 380px;
+            animation: fadeIn 0.8s ease-out, glow 3s ease-in-out infinite;
+            width: min(90vw, 360px);
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+            from { opacity: 0; transform: translate(-50%, -50%) scale(0.92); }
             to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
         }
 
         @keyframes glow {
-            0%, 100% { box-shadow: 0 20px 60px rgba(255, 150, 180, 0.3), 0 0 0 1px rgba(255, 200, 220, 0.5); }
-            50% { box-shadow: 0 20px 80px rgba(255, 150, 180, 0.5), 0 0 0 1px rgba(255, 200, 220, 0.8); }
+            0%, 100% { box-shadow: 0 25px 60px rgba(255, 150, 180, 0.25), 0 0 0 1px rgba(255, 200, 220, 0.4); }
+            50% { box-shadow: 0 25px 80px rgba(255, 150, 180, 0.4), 0 0 0 1px rgba(255, 200, 220, 0.7); }
+        }
+
+        .login-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            15% { transform: scale(1.15); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.1); }
         }
 
         .login-container h1 {
             color: #e75480;
-            margin-bottom: 35px;
-            font-size: 2.2em;
-            text-shadow: 0 0 20px rgba(231, 84, 128, 0.3);
-            animation: titlePulse 3s ease-in-out infinite;
-        }
-
-        @keyframes titlePulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.03); }
+            margin-bottom: 30px;
+            font-family: 'Pacifico', cursive;
+            font-size: 1.6em;
+            text-shadow: 0 0 20px rgba(231, 84, 128, 0.2);
         }
 
         .input-group {
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             text-align: left;
         }
 
         .input-group label {
             display: block;
-            margin-bottom: 8px;
-            color: #888;
-            font-weight: bold;
-            font-size: 14px;
+            margin-bottom: 6px;
+            color: #999;
+            font-weight: 500;
+            font-size: 13px;
+            letter-spacing: 0.5px;
         }
 
         .input-group input {
             width: 100%;
-            padding: 14px 18px;
-            border: 2px solid #ffd1e3;
+            padding: 14px 16px;
+            border: 2px solid #ffe0ec;
             border-radius: 14px;
-            font-size: 16px;
+            font-size: 15px;
+            font-family: 'Poppins', sans-serif;
             transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.8);
+            color: #333;
+        }
+
+        .input-group input::placeholder {
+            color: #ccc;
         }
 
         .input-group input:focus {
             outline: none;
             border-color: #e75480;
-            box-shadow: 0 0 20px rgba(231, 84, 128, 0.2);
-            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(231, 84, 128, 0.15);
+            background: #fff;
         }
 
         .login-btn {
             width: 100%;
-            padding: 16px;
+            padding: 15px;
             background: linear-gradient(135deg, #ff6b9d, #e75480);
             color: white;
             border: none;
             border-radius: 14px;
-            font-size: 18px;
-            font-weight: bold;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-top: 10px;
+            margin-top: 8px;
             letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 8px 25px rgba(231, 84, 128, 0.3);
         }
 
-        .login-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(231, 84, 128, 0.4);
+        .login-btn:active {
+            transform: scale(0.97);
+            box-shadow: 0 4px 15px rgba(231, 84, 128, 0.4);
         }
 
         .error-msg {
             color: #e75480;
-            margin-top: 15px;
-            font-size: 14px;
+            margin-top: 14px;
+            font-size: 13px;
             opacity: 0;
             transition: opacity 0.3s ease;
-            font-weight: bold;
+            font-weight: 500;
         }
 
         .error-msg.show {
             opacity: 1;
-            animation: shake 0.5s ease;
+            animation: shake 0.4s ease;
         }
 
         @keyframes shake {
@@ -165,12 +180,17 @@
             75% { transform: translateX(5px); }
         }
 
+        /* GALLERY */
         .gallery-container {
             display: none;
-            padding: 50px;
+            width: 100%;
+            height: 100vh;
+            height: -webkit-fill-available;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            padding: 30px 20px 50px;
             text-align: center;
-            min-height: 100vh;
-            overflow: hidden;
         }
 
         .gallery-container.active {
@@ -179,28 +199,42 @@
 
         .gallery-container h1 {
             color: #e75480;
-            margin-bottom: 50px;
-            font-size: 3em;
-            animation: titleGlow 4s ease infinite;
+            margin-bottom: 10px;
+            font-family: 'Pacifico', cursive;
+            font-size: 1.8em;
+            animation: titleGlow 3s ease infinite;
+            line-height: 1.4;
+        }
+
+        .subtitle {
+            color: #ff85a2;
+            font-size: 14px;
+            margin-bottom: 30px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
         }
 
         @keyframes titleGlow {
-            0%, 100% { text-shadow: 0 0 20px rgba(231, 84, 128, 0.3); }
-            50% { text-shadow: 0 0 40px rgba(231, 84, 128, 0.6), 0 0 60px rgba(255, 182, 193, 0.4); }
+            0%, 100% { text-shadow: 0 0 15px rgba(231, 84, 128, 0.2); }
+            50% { text-shadow: 0 0 30px rgba(231, 84, 128, 0.5), 0 0 50px rgba(255, 182, 193, 0.3); }
         }
 
         .photo-gallery {
             display: flex;
-            justify-content: center;
-            gap: 50px;
-            flex-wrap: wrap;
-            margin-top: 40px;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            padding-bottom: 40px;
         }
 
         .photo-item {
+            position: relative;
             opacity: 0;
-            transform: translateY(50px) scale(0.9);
-            transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: translateY(40px) scale(0.95);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 100%;
+            max-width: 340px;
         }
 
         .photo-item.show {
@@ -208,35 +242,91 @@
             transform: translateY(0) scale(1);
         }
 
+        .photo-wrapper {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+            border: 3px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .photo-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, transparent 60%, rgba(231, 84, 128, 0.08) 100%);
+            pointer-events: none;
+        }
+
         .photo-item img {
-            width: 280px;
-            height: 400px;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 9/12;
             object-fit: cover;
-            border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-            border: 4px solid white;
+            display: block;
             transition: all 0.5s ease;
-            transform: rotate(0deg);
         }
 
-        .photo-item.show img {
-            filter: brightness(1.05) drop-shadow(0 0 20px rgba(231, 84, 128, 0.3));
+        .photo-item.show .photo-wrapper {
+            box-shadow: 0 20px 60px rgba(231, 84, 128, 0.2);
         }
 
-        .photo-item img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 20px 50px rgba(231, 84, 128, 0.3);
+        .photo-item:active img {
+            transform: scale(1.02);
         }
 
+        .photo-caption {
+            margin-top: 12px;
+            color: #e75480;
+            font-family: 'Pacifico', cursive;
+            font-size: 16px;
+            opacity: 0;
+            transition: opacity 0.5s ease 0.3s;
+        }
+
+        .photo-item.show .photo-caption {
+            opacity: 1;
+        }
+
+        .mini-hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: visible;
+            z-index: 10;
+        }
+
+        .mini-heart {
+            position: absolute;
+            animation: miniFloat 2.5s ease-in-out infinite;
+            pointer-events: none;
+            filter: drop-shadow(0 2px 4px rgba(231, 84, 128, 0.3));
+        }
+
+        @keyframes miniFloat {
+            0%, 100% { transform: translateY(0) scale(1) rotate(0deg); opacity: 0.6; }
+            25% { transform: translateY(-8px) scale(1.1) rotate(8deg); opacity: 1; }
+            50% { transform: translateY(-14px) scale(1.15) rotate(-5deg); opacity: 0.7; }
+            75% { transform: translateY(-5px) scale(1.05) rotate(6deg); opacity: 0.9; }
+        }
+
+        /* LOVE TEXT */
         .love-text {
             position: fixed;
-            font-size: 26px;
+            font-family: 'Pacifico', cursive;
+            font-size: 16px;
             color: #e75480;
             font-weight: bold;
             opacity: 0;
-            animation: floatText 4s ease-in-out infinite;
-            text-shadow: 0 0 15px rgba(231, 84, 128, 0.4);
-            letter-spacing: 2px;
+            animation: floatText 5s ease-in-out infinite;
+            text-shadow: 0 0 12px rgba(231, 84, 128, 0.3);
+            letter-spacing: 1px;
             white-space: nowrap;
             pointer-events: none;
             z-index: 50;
@@ -244,72 +334,142 @@
 
         @keyframes floatText {
             0%, 100% { opacity: 0; transform: translateY(0); }
-            20% { opacity: 0.8; }
-            80% { opacity: 0.8; }
-            50% { opacity: 1; transform: translateY(-20px); }
+            20% { opacity: 0.7; }
+            80% { opacity: 0.7; }
+            50% { opacity: 0.9; transform: translateY(-15px); }
         }
 
-        .love-text:nth-child(1) { top: 15%; left: 8%; animation-delay: 0s; }
-        .love-text:nth-child(2) { top: 25%; right: 10%; animation-delay: 0.8s; }
-        .love-text:nth-child(3) { bottom: 20%; left: 12%; animation-delay: 1.6s; }
-        .love-text:nth-child(4) { bottom: 30%; right: 8%; animation-delay: 2.4s; }
-        .love-text:nth-child(5) { top: 45%; left: 5%; animation-delay: 3.2s; }
-        .love-text:nth-child(6) { top: 10%; left: 45%; animation-delay: 1s; }
-        .love-text:nth-child(7) { bottom: 15%; left: 45%; animation-delay: 2s; }
+        .love-text:nth-child(1) { top: 8%; left: 5%; animation-delay: 0s; }
+        .love-text:nth-child(2) { top: 20%; right: 5%; animation-delay: 1s; }
+        .love-text:nth-child(3) { bottom: 25%; left: 3%; animation-delay: 2s; }
+        .love-text:nth-child(4) { bottom: 12%; right: 5%; animation-delay: 3s; }
+        .love-text:nth-child(5) { top: 45%; left: 2%; animation-delay: 1.5s; }
+        .love-text:nth-child(6) { top: 5%; left: 40%; animation-delay: 2.5s; }
+        .love-text:nth-child(7) { bottom: 5%; left: 35%; animation-delay: 0.5s; }
 
-        @media (max-width: 768px) {
-            .photo-item img {
-                width: 220px;
-                height: 320px;
-            }
+        /* ENDING */
+        .ending {
+            margin-top: 40px;
+            padding: 30px;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
 
+        .ending.show {
+            opacity: 1;
+        }
+
+        .ending-heart {
+            font-size: 60px;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        .ending-text {
+            color: #e75480;
+            font-family: 'Pacifico', cursive;
+            font-size: 1.3em;
+            margin-top: 15px;
+            line-height: 1.6;
+        }
+
+        /* SCROLLBAR */
+        .gallery-container::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .gallery-container::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .gallery-container::-webkit-scrollbar-thumb {
+            background: rgba(231, 84, 128, 0.3);
+            border-radius: 10px;
+        }
+
+        @media (min-width: 768px) {
             .login-container {
-                width: 90%;
-                padding: 35px 30px;
+                padding: 50px 45px;
+                width: min(85vw, 400px);
             }
 
             .login-container h1 {
                 font-size: 1.8em;
             }
 
-            .love-text {
-                font-size: 18px;
+            .gallery-container {
+                padding: 40px 30px 60px;
             }
 
             .gallery-container h1 {
                 font-size: 2.2em;
+            }
+
+            .photo-item {
+                max-width: 380px;
+            }
+
+            .love-text {
+                font-size: 20px;
             }
         }
     </style>
 </head>
 <body>
     <div class="login-container" id="loginContainer">
-        <h1>Hoş Geldin 💕</h1>
+        <div class="login-icon">💌</div>
+        <h1>Hoş Geldin</h1>
         <div class="input-group">
-            <label for="username">Kullanıcı Adı:</label>
-            <input type="text" id="username" placeholder="Kullanıcı adınızı girin">
+            <label>Kullanıcı Adı</label>
+            <input type="text" id="username" placeholder="Adını gir...">
         </div>
         <div class="input-group">
-            <label for="password">Şifre:</label>
-            <input type="password" id="password" placeholder="Şifrenizi girin">
+            <label>Şifre</label>
+            <input type="password" id="password" placeholder="Şifreni gir...">
         </div>
-        <button class="login-btn" onclick="login()">Giriş Yap</button>
-        <div class="error-msg" id="errorMsg">Kullanıcı adı veya şifre yanlış!</div>
+        <button class="login-btn" onclick="login()">Giriş Yap 💕</button>
+        <div class="error-msg" id="errorMsg">Yanlış girdin ama yine de seviyorum 😅</div>
     </div>
 
     <div class="gallery-container" id="galleryContainer">
         <h1>SENİ ÇOK SEVİYORUM 💖</h1>
-        <div class="love-text">I love you</div>
+        <div class="subtitle">her gün her an</div>
+
         <div class="love-text">Seni Seviyorum</div>
-        <div class="love-text">I love you</div>
+        <div class="love-text">I Love You</div>
         <div class="love-text">Seni Seviyorum</div>
-        <div class="love-text">I love you</div>
+        <div class="love-text">I Love You</div>
         <div class="love-text">Seni Seviyorum</div>
-        <div class="love-text">I love you</div>
+        <div class="love-text">I Love You</div>
+        <div class="love-text">Seni Seviyorum</div>
+
         <div class="photo-gallery" id="photoGallery">
-            <div class="photo-item"><img src="WhatsApp Image 2026-06-15 at 10.19.19.jpeg" alt="Fotoğraf 1"></div>
-            <div class="photo-item"><img src="WhatsApp Image 2026-06-15 at 10.19.18 (1).jpeg" alt="Fotoğraf 2"></div>
-            <div class="photo-item"><img src="WhatsApp Image 2026-06-15 at 10.19.18.jpeg" alt="Fotoğraf 3"></div>
+            <div class="photo-item">
+                <div class="photo-wrapper">
+                    <img src="WhatsApp Image 2026-06-15 at 10.19.19.jpeg" alt="Fotoğraf 1">
+                </div>
+                <div class="mini-hearts"></div>
+                <div class="photo-caption">Ben seni çok seviyorum 💕</div>
+            </div>
+            <div class="photo-item">
+                <div class="photo-wrapper">
+                    <img src="WhatsApp Image 2026-06-15 at 10.19.18 (1).jpeg" alt="Fotoğraf 2">
+                </div>
+                <div class="mini-hearts"></div>
+                <div class="photo-caption">Her günüm seninle güzel 🌸</div>
+            </div>
+            <div class="photo-item">
+                <div class="photo-wrapper">
+                    <img src="WhatsApp Image 2026-06-15 at 10.19.18.jpeg" alt="Fotoğraf 3">
+                </div>
+                <div class="mini-hearts"></div>
+                <div class="photo-caption">Sen benim her şeyimsin 💗</div>
+            </div>
+        </div>
+
+        <div class="ending" id="ending">
+            <div class="ending-heart">❤️</div>
+            <div class="ending-text">Seni Sonsuza Kadar Seveceğim</div>
         </div>
     </div>
 
@@ -322,46 +482,56 @@
             if (username === 'elif' && password === 'aliereneaşığım') {
                 document.getElementById('loginContainer').style.display = 'none';
                 document.getElementById('galleryContainer').classList.add('active');
-                showPhotos();
+                setTimeout(showPhotos, 300);
             } else {
                 errorMsg.classList.add('show');
-                setTimeout(() => {
-                    errorMsg.classList.remove('show');
-                }, 3000);
+                setTimeout(() => errorMsg.classList.remove('show'), 3000);
             }
         }
 
         function createHeartRain() {
-            const body = document.body;
             const heart = document.createElement('div');
             heart.className = 'heart-rain';
             heart.innerHTML = '❤';
-            
-            const size = Math.random() * 20 + 14;
+            const size = Math.random() * 16 + 12;
             heart.style.fontSize = size + 'px';
             heart.style.left = Math.random() * window.innerWidth + 'px';
-            
-            const colors = ['#ff6b9d', '#ff85a2', '#ffb6c1', '#ffc0cb', '#ff69b4', '#e75480'];
+            const colors = ['#ff6b9d', '#ff85a2', '#ffb6c1', '#ffc0cb', '#ff69b4', '#e75480', '#ffd1e3'];
             heart.style.color = colors[Math.floor(Math.random() * colors.length)];
-            
             const duration = Math.random() * 4 + 5;
             heart.style.animationDuration = duration + 's';
-            
-            heart.style.animationDelay = Math.random() * 1 + 's';
-            
-            body.appendChild(heart);
-
-            setTimeout(() => {
-                heart.remove();
-            }, (duration + 2) * 1000);
+            heart.style.animationDelay = Math.random() * 0.5 + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), (duration + 1) * 1000);
         }
 
-        function createInitialHearts() {
-            for (let i = 0; i < 25; i++) {
-                setTimeout(() => {
-                    createHeartRain();
-                }, i * 200);
-            }
+        function createMiniHearts(container) {
+            if (!container) return;
+            const spots = [
+                { top: '5%', left: '0%' },
+                { top: '2%', left: '45%' },
+                { top: '10%', right: '0%' },
+                { bottom: '15%', left: '5%' },
+                { bottom: '8%', right: '5%' },
+                { top: '35%', left: '-8%' },
+                { top: '55%', right: '-8%' },
+                { bottom: '30%', left: '45%' },
+            ];
+            const colors = ['#ff6b9d', '#ff85a2', '#ffb6c1', '#ffc0cb', '#ff69b4', '#e75480'];
+            spots.forEach((pos, i) => {
+                const h = document.createElement('div');
+                h.className = 'mini-heart';
+                h.innerHTML = '❤';
+                h.style.fontSize = (Math.random() * 7 + 11) + 'px';
+                h.style.color = colors[Math.floor(Math.random() * colors.length)];
+                h.style.animationDelay = (i * 0.35) + 's';
+                h.style.animationDuration = (Math.random() * 1 + 1.8) + 's';
+                if (pos.top) h.style.top = pos.top;
+                if (pos.bottom) h.style.bottom = pos.bottom;
+                if (pos.left) h.style.left = pos.left;
+                if (pos.right) h.style.right = pos.right;
+                container.appendChild(h);
+            });
         }
 
         function showPhotos() {
@@ -369,13 +539,17 @@
             photos.forEach((photo, index) => {
                 setTimeout(() => {
                     photo.classList.add('show');
-                }, index * 1200);
+                    createMiniHearts(photo.querySelector('.mini-hearts'));
+                }, index * 1000);
             });
+            setTimeout(() => {
+                document.getElementById('ending').classList.add('show');
+            }, photos.length * 1000 + 500);
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            createInitialHearts();
-            setInterval(createHeartRain, 300);
+        document.addEventListener('DOMContentLoaded', () => {
+            for (let i = 0; i < 20; i++) setTimeout(createHeartRain, i * 250);
+            setInterval(createHeartRain, 350);
         });
     </script>
 </body>
