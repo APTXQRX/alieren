@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aşk Sitesi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            background: linear-gradient(180deg, #ffe4f0, #fff0f5, #ffffff, #fff5f8);
+            background-size: 100% 300%;
+            animation: gradientBG 10s ease infinite;
+            min-height: 100vh;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 0% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+
+        .heart-rain {
+            position: fixed;
+            top: -60px;
+            z-index: 1;
+            animation: fall linear infinite;
+            pointer-events: none;
+            font-style: normal;
+        }
+
+        @keyframes fall {
+            0% {
+                top: -60px;
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+            25% {
+                transform: translateX(30px) scale(1.05);
+            }
+            50% {
+                transform: translateX(-20px) scale(0.95);
+            }
+            75% {
+                transform: translateX(25px) scale(1.02);
+            }
+            100% {
+                top: 110vh;
+                opacity: 0.3;
+                transform: translateX(-10px) scale(1);
+            }
+        }
+
+        .login-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.92);
+            padding: 50px 45px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(255, 150, 180, 0.3), 0 0 0 1px rgba(255, 200, 220, 0.5);
+            text-align: center;
+            z-index: 100;
+            animation: fadeIn 1s ease-in, glow 3s ease-in-out infinite;
+            width: 380px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 20px 60px rgba(255, 150, 180, 0.3), 0 0 0 1px rgba(255, 200, 220, 0.5); }
+            50% { box-shadow: 0 20px 80px rgba(255, 150, 180, 0.5), 0 0 0 1px rgba(255, 200, 220, 0.8); }
+        }
+
+        .login-container h1 {
+            color: #e75480;
+            margin-bottom: 35px;
+            font-size: 2.2em;
+            text-shadow: 0 0 20px rgba(231, 84, 128, 0.3);
+            animation: titlePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes titlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #888;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #ffd1e3;
+            border-radius: 14px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #e75480;
+            box-shadow: 0 0 20px rgba(231, 84, 128, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #ff6b9d, #e75480);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(231, 84, 128, 0.4);
+        }
+
+        .error-msg {
+            color: #e75480;
+            margin-top: 15px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            font-weight: bold;
+        }
+
+        .error-msg.show {
+            opacity: 1;
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .gallery-container {
+            display: none;
+            padding: 50px;
+            text-align: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .gallery-container.active {
+            display: block;
+        }
+
+        .gallery-container h1 {
+            color: #e75480;
+            margin-bottom: 50px;
+            font-size: 3em;
+            animation: titleGlow 4s ease infinite;
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { text-shadow: 0 0 20px rgba(231, 84, 128, 0.3); }
+            50% { text-shadow: 0 0 40px rgba(231, 84, 128, 0.6), 0 0 60px rgba(255, 182, 193, 0.4); }
+        }
+
+        .photo-gallery {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .photo-item {
+            opacity: 0;
+            transform: translateY(50px) scale(0.9);
+            transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .photo-item.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .photo-item img {
+            width: 280px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            border: 4px solid white;
+            transition: all 0.5s ease;
+            transform: rotate(0deg);
+        }
+
+        .photo-item.show img {
+            filter: brightness(1.05) drop-shadow(0 0 20px rgba(231, 84, 128, 0.3));
+        }
+
+        .photo-item img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 50px rgba(231, 84, 128, 0.3);
+        }
+
+        .love-text {
+            position: fixed;
+            font-size: 26px;
+            color: #e75480;
+            font-weight: bold;
+            opacity: 0;
+            animation: floatText 4s ease-in-out infinite;
+            text-shadow: 0 0 15px rgba(231, 84, 128, 0.4);
+            letter-spacing: 2px;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 50;
+        }
+
+        @keyframes floatText {
+            0%, 100% { opacity: 0; transform: translateY(0); }
+            20% { opacity: 0.8; }
+            80% { opacity: 0.8; }
+            50% { opacity: 1; transform: translateY(-20px); }
+        }
+
+        .love-text:nth-child(1) { top: 15%; left: 8%; animation-delay: 0s; }
+        .love-text:nth-child(2) { top: 25%; right: 10%; animation-delay: 0.8s; }
+        .love-text:nth-child(3) { bottom: 20%; left: 12%; animation-delay: 1.6s; }
+        .love-text:nth-child(4) { bottom: 30%; right: 8%; animation-delay: 2.4s; }
+        .love-text:nth-child(5) { top: 45%; left: 5%; animation-delay: 3.2s; }
+        .love-text:nth-child(6) { top: 10%; left: 45%; animation-delay: 1s; }
+        .love-text:nth-child(7) { bottom: 15%; left: 45%; animation-delay: 2s; }
+
+        @media (max-width: 768px) {
+            .photo-item img {
+                width: 220px;
+                height: 320px;
+            }
+
+            .login-container {
+                width: 90%;
+                padding: 35px 30px;
+            }
+
+            .login-container h1 {
+                font-size: 1.8em;
+            }
+
+            .love-text {
+                font-size: 18px;
+            }
+
+            .gallery-container h1 {
+                font-size: 2.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container" id="loginContainer">
+        <h1>Hoş Geldin 💕</h1>
+        <div class="input-group">
+            <label for="username">Kullanıcı Adı:</label>
+            <input type="text" id="username" placeholder="Kullanıcı adınızı girin">
+        </div>
+        <div class="input-group">
+            <label for="password">Şifre:</label>
+            <input type="password" id="password" placeholder="Şifrenizi girin">
+        </div>
+        <button class="login-btn" onclick="login()">Giriş Yap</button>
+        <div class="error-msg" id="errorMsg">Kullanıcı adı veya şifre yanlış!</div>
+    </div>
+
+    <div class="gallery-container" id="galleryContainer">
+        <h1>Sana Aşık Oldum 💖</h1>
+        <div class="love-text">I love you</div>
+        <div class="love-text">Seni Seviyorum</div>
+        <div class="love-text">I love you</div>
+        <div class="love-text">Seni Seviyorum</div>
+        <div class="love-text">I love you</div>
+        <div class="love-text">Seni Seviyorum</div>
+        <div class="love-text">I love you</div>
+        <div class="photo-gallery" id="photoGallery">
+            <div class="photo-item"><img src="WhatsApp Image 2026-06-15 at 10.19.19.jpeg" alt="Fotoğraf 1"></div>
+            <div class="photo-item"><img src="WhatsApp Image 2026-06-15 at 10.19.18 (1).jpeg" alt="Fotoğraf 2"></div>
+            <div class="photo-item"><img src="WhatsApp Image 2026-06-15 at 10.19.18.jpeg" alt="Fotoğraf 3"></div>
+        </div>
+    </div>
+
+    <script>
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMsg = document.getElementById('errorMsg');
+
+            if (username === 'elif' && password === 'aliereneaşığım') {
+                document.getElementById('loginContainer').style.display = 'none';
+                document.getElementById('galleryContainer').classList.add('active');
+                showPhotos();
+            } else {
+                errorMsg.classList.add('show');
+                setTimeout(() => {
+                    errorMsg.classList.remove('show');
+                }, 3000);
+            }
+        }
+
+        function createHeartRain() {
+            const body = document.body;
+            const heart = document.createElement('div');
+            heart.className = 'heart-rain';
+            heart.innerHTML = '❤';
+            
+            const size = Math.random() * 20 + 14;
+            heart.style.fontSize = size + 'px';
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            
+            const colors = ['#ff6b9d', '#ff85a2', '#ffb6c1', '#ffc0cb', '#ff69b4', '#e75480'];
+            heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+            
+            const duration = Math.random() * 4 + 5;
+            heart.style.animationDuration = duration + 's';
+            
+            heart.style.animationDelay = Math.random() * 1 + 's';
+            
+            body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, (duration + 2) * 1000);
+        }
+
+        function createInitialHearts() {
+            for (let i = 0; i < 25; i++) {
+                setTimeout(() => {
+                    createHeartRain();
+                }, i * 200);
+            }
+        }
+
+        function showPhotos() {
+            const photos = document.querySelectorAll('.photo-item');
+            photos.forEach((photo, index) => {
+                setTimeout(() => {
+                    photo.classList.add('show');
+                }, index * 1200);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            createInitialHearts();
+            setInterval(createHeartRain, 300);
+        });
+    </script>
+</body>
+</html>
